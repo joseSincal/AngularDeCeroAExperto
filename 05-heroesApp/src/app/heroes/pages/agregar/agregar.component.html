@@ -1,5 +1,6 @@
 <h1>
-  Nuevo Heroe <small>{{ heroe.superhero }}</small>
+  {{ heroe.id ? "Editar" : "Nuevo" }}
+  Heroe <small>{{ heroe.superhero }}</small>
 </h1>
 
 <div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="column">
@@ -7,7 +8,7 @@
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
       <mat-form-field fxFlex="100" fxLayout.xs="column">
         <mat-label>Super Heroe</mat-label>
-        <input matInput type="text" [(ngModel)]="heroe.superhero"  required />
+        <input matInput type="text" [(ngModel)]="heroe.superhero" required />
       </mat-form-field>
 
       <mat-form-field fxFlex="100">
@@ -18,7 +19,12 @@
 
     <mat-form-field>
       <mat-label>Primera Aparicion</mat-label>
-      <input matInput type="text" [(ngModel)]="heroe.first_appearance" required />
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="heroe.first_appearance"
+        required
+      />
     </mat-form-field>
 
     <mat-form-field>
@@ -42,9 +48,22 @@
 
     <br />
 
-    <button mat-raised-button color="primary" (click)="guardar()">
-      <mat-icon>save</mat-icon> Guardar
-    </button>
+    <div fxLayout>
+      <button mat-raised-button color="primary" (click)="guardar()">
+        <mat-icon>save</mat-icon> {{ heroe.id ? "Actualizar" : "Crear" }}
+      </button>
+
+      <span class="spacer"></span>
+
+      <button
+        *ngIf="heroe.id"
+        mat-raised-button
+        (click)="borrar()"
+        color="warn"
+      >
+        <mat-icon>remove</mat-icon> Borrar
+      </button>
+    </div>
   </div>
 
   <div fxFlex="50">
