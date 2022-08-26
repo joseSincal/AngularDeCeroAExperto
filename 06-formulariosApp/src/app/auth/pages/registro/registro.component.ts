@@ -1,16 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class RegistroComponent implements OnInit {
+  // TODO: Temporal
+  nombreApellidoPattern: string = '([a-zA-Z]+) ([a-zA-Z]+)';
 
-  constructor() { }
+  miFormulario: FormGroup = this.fb.group({
+    nombre: [
+      '',
+      [Validators.required, Validators.pattern(this.nombreApellidoPattern)],
+    ],
+  });
 
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {}
+
+  campoNoValido(campo: string) {
+    return (
+      this.miFormulario.get(campo)?.invalid &&
+      this.miFormulario.get(campo)?.touched
+    );
   }
 
+  submitFormulario() {
+    console.log(this.miFormulario);
+    this.miFormulario.markAllAsTouched();
+  }
 }
