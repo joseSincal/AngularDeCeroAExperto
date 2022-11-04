@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styles: [],
 })
 export class AgregarComponent {
+  texto1: string = 'Jose Sincal';
+
   miFormulario: FormGroup = this.fb.group({
     nombre: ['', Validators.required],
   });
@@ -15,5 +17,9 @@ export class AgregarComponent {
 
   tieneError(campo: string): boolean {
     return this.miFormulario.get(campo)?.invalid || false;
+  }
+
+  cambiarNombre() {
+    this.texto1 = 'Juan Carlos';
   }
 }
