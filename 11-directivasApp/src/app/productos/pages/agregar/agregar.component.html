@@ -12,7 +12,11 @@
     </div>
 
     <div class="col-auto">
-      <span error-msg [mensaje]="texto1" *ngIf="tieneError('nombre')"
+      <span
+        error-msg
+        [mensaje]="texto1"
+        [color]="color"
+        [valido]="!tieneError('nombre')"
         >Este campo es obligatorio</span
       >
     </div>
@@ -22,9 +26,21 @@
     <div class="col">
       <button class="btn btn-primary" (click)="cambiarNombre()">Guardar</button>
     </div>
+
+    <div class="col">
+      <button class="btn btn-primary" (click)="cambiarColor()">
+        Cambiar color
+      </button>
+    </div>
   </div>
 </form>
 
 <h3 class="mt-5">Formulario</h3>
 <pre>Value: {{ miFormulario.value | json }}</pre>
 <pre>Valid: {{ miFormulario.valid }}</pre>
+
+<div class="row mt-5" *customIf="miFormulario.valid">
+  <div class="col">
+    <div class="alert alert-primary">Todo OK!</div>
+  </div>
+</div>
